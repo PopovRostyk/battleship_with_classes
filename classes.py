@@ -43,4 +43,3 @@ class Game:
         self._fields = fields
         self._players = players
 
-print(Field().field_with_ships())
