@@ -3,7 +3,7 @@ import string
 
 class Player:
     def __init__(self, name):
-        self._name = name
+        self.name = name
 
     def read_position(self, pos):
         pass
@@ -68,10 +68,17 @@ class Game:
         self.players = players
 
     def start_game(self):
-        player = Player()
-        try:
-            player.name = input('Write your name: ')
+        for i in range(2):
+            player = Player(input('write name '))
             Game().players.append(player)
-        
+
+
+
 Game().start_game()
 print(Game().players)
+#self.name = input('Write your name: ')
+ #       self.name2 = input('Write your name: ')
+  #      self.player1 = Player(self.name)
+   #     self.player2 = Player(self.name2)
+    #    self.players.append(self.player1)
+     #   self.players.append(self.player2)
