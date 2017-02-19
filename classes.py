@@ -1,5 +1,6 @@
 import string
 
+
 class Player:
     def __init__(self, name):
         self._name = name
@@ -38,12 +39,13 @@ class Field:
                     print(item, end=' ')
             print('\n')
         return b
-    def field_with_ships(self):
-        lst = [[' ' for i in range(10)] for i in range(10)]
-        for items in lst:
-            print(items)
 
-field = Field().field_without_ships()
+    def field_with_ships(self):
+        b = [['X' for i in range(10)] for i in range(10)]
+        return b
+field = Field().field_with_ships()
+
+
 class Ship:
     def __init__(self, bow=0, horizontal=0, length=0, hit=0):
         self.bow = bow
@@ -52,15 +54,21 @@ class Ship:
         self._hit = hit
 
     def shoot_at(self, position):
-        pass
-
-
+        num_letter = next(item for item in position if isinstance(item, str) and item.isalpha()).lower()
+        num_letter = string.ascii_lowercase[:10].find(num_letter)
+        num_num = next(item for item in position if isinstance(item, int))
+        field[num_num - 1][num_letter] = 'o'
+        return field
 
 
 class Game:
-    def __init__(self, current_player, fields=[], players=[]):
+    def __init__(self, current_player, fields, players):
         self._current_player = current_player
         self._fields = fields
         self._players = players
+    def start_game(self):
+        name = input('Write your name: ')
+        name = Player(name)
 
-print(Ship().shoot_at((1, 'b')))
+print(Ship().shoot_at(('A', 10)))
+Player.name = input('print name')
