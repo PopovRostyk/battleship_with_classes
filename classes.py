@@ -5,8 +5,17 @@ class Player:
     def __init__(self, name):
         self.name = name
 
-    def read_position(self, pos):
-        pass
+    def read_position(self):
+        pos = input('Where you want to shot: ')
+        for items in pos:
+            if items.isdigit():
+                num = int(items)
+            elif items.isalpha():
+                letter = items
+        return (num, letter)
+
+
+
 
 
 class Field:
@@ -14,7 +23,11 @@ class Field:
         self._ships = ships
 
     def shoot_at(self, tuple):
-        pass
+        num_letter = next(item for item in tuple if isinstance(item, str) and item.isalpha()).lower()
+        num_letter = string.ascii_lowercase[:10].find(num_letter)
+        num_num = next(item for item in tuple if isinstance(item, int))
+        field[num_num - 1][num_letter] = 'o'
+        return field
 
     def field_without_ships(self):
         a = []
@@ -41,7 +54,7 @@ class Field:
         return b
 
     def field_with_ships(self):
-        b = [['X' for i in range(10)] for i in range(10)]
+        b = [['X' for _ in range(10)] for _ in range(10)]
         return b
 field = Field().field_with_ships()
 
@@ -54,11 +67,7 @@ class Ship:
         self._hit = hit
 
     def shoot_at(self, position):
-        num_letter = next(item for item in position if isinstance(item, str) and item.isalpha()).lower()
-        num_letter = string.ascii_lowercase[:10].find(num_letter)
-        num_num = next(item for item in position if isinstance(item, int))
-        field[num_num - 1][num_letter] = 'o'
-        return field
+        pass
 
 
 class Game:
@@ -67,18 +76,9 @@ class Game:
         self._fields = fields
         self.players = players
 
-    def start_game(self):
+    def adding_players(self):
         for i in range(2):
             player = Player(input('write name '))
             Game().players.append(player)
 
-
-
-Game().start_game()
-print(Game().players)
-#self.name = input('Write your name: ')
- #       self.name2 = input('Write your name: ')
-  #      self.player1 = Player(self.name)
-   #     self.player2 = Player(self.name2)
-    #    self.players.append(self.player1)
-     #   self.players.append(self.player2)
+print(Field().shoot_at(Player('john').read_position()))
