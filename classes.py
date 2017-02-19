@@ -62,13 +62,16 @@ class Ship:
 
 
 class Game:
-    def __init__(self, current_player, fields, players):
+    def __init__(self, current_player=[], fields=[], players=[]):
         self._current_player = current_player
         self._fields = fields
-        self._players = players
-    def start_game(self):
-        name = input('Write your name: ')
-        name = Player(name)
+        self.players = players
 
-print(Ship().shoot_at(('A', 10)))
-Player.name = input('print name')
+    def start_game(self):
+        player = Player()
+        try:
+            player.name = input('Write your name: ')
+            Game().players.append(player)
+        
+Game().start_game()
+print(Game().players)
